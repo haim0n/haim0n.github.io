@@ -12,7 +12,7 @@ description: > # this means to ignore newlines until "baseurl:"
   Software grunts about Linux and Opensource. Some experiments in Openstack
   along the way.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://yourdomain.com" # the base hostname & protocol for your site
+url: "http://haim0n.gihub.io" # the base hostname & protocol for your site
 github_username:  haim0n
 
 # Build settings
