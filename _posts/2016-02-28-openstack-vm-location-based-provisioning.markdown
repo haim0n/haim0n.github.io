@@ -81,7 +81,7 @@ Our location decision function does the following:
 * gets the user's location
 * travels the table and for each entry calculates the distance
 * returns a list of placement candidates
-* attempts to boot an instance with specified flavor
+* attempts to boot an instance with specified `app1-instance` flavor
 
 {% highlight bash %}
 $ nova boot --flavor 84 --image 64d985ba-2cfa-434d-b789-06eac141c260 \
