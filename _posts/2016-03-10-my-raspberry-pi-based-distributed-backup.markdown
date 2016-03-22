@@ -2,6 +2,7 @@
 title: Complete Guide to Raspberry Pi Based Distributed Backup
 layout: post
 categories: Raspberry Pi,Raspbian, Syncthing, Distributed Backup
+comments: true
 ---
 
 # What problem on earth are we trying to solve here ?
