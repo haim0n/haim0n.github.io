@@ -1,20 +1,17 @@
 ---
 title: Openstack Location Based VM Provisioning
 layout: post
-categories: Openstack, Superfluidity, Nova, Activity Zones
+categories: Openstack, Superfluidity, Nova, 5G, Location Based Services
 ---
 
 
-# Real World Use Case - 5G Mobile App offloading
-Taking advantage of location awareness, an ISP will offload many of the services that currently run on users' mobile devices to the cloud, providing extra security and reduced battery usage, while keeping a near local user experience.
-Given the small footprint envisioned for the [`Superfluid`][superfluidity] Cloud guests, services can be deployed in a VM per user fashion, providing extreme personalization and unmatched security and privacy. The small footprint together with the mobility properties of the Superfluid Cloud, enable the processing units to follow the user around. Deployed in the edge, from the home gateway to the closest [`BTS`][bts-wiki], and therefore eliminating all sorts of overheads associated with centralized approaches, for a user experience that matches a local application.
-
-# Mission Statement
-Having the ability to migrate or instantiate a service, based on the end-user (application) physical location.
-
-
-# Sample Setup
+# Real World Use Case - Video Orchestration and Optimization
 ![Mobile edge offloading schema]({{ site.url }}/assets/mobile-edge-offloading.png)
+
+
+Being aware to the mobile end user's location, a TV provider can provide advanced video optimization
+techniques according to the mobile access conditions.
+
 
 # Nova Host Aggregates
 A  [`host aggregate`][host-aggregates] is simply put, a group of hosts sharing some metadata. A host can be in more than one host aggregate. The concept of host aggregates is only exposed to cloud administrators.
