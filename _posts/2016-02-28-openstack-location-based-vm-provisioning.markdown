@@ -2,6 +2,7 @@
 title: Openstack Location Based VM Provisioning
 layout: post
 categories: Openstack, Superfluidity, Nova, 5G, Location Based Services
+comments: true
 ---
 
 
