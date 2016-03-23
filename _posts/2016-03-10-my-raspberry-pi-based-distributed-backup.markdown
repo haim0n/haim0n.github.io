@@ -115,7 +115,7 @@ Kill the process by Ctrl+C in the terminal.
 {% highlight bash %}
 # edit the configuration
 sed -ie 's/127.0.0.1/0.0.0.0/' /home/pi/.config/syncthing/config.xml && \
-sed -ie 's/tls=\"false\"/tls=\"true\"' /home/pi/.config/syncthing/config.xml && \
+sed -ie 's/tls=\"false\"/tls=\"true\"/' /home/pi/.config/syncthing/config.xml && \
 
 # start the service
 sudo systemctl --user start syncthing
