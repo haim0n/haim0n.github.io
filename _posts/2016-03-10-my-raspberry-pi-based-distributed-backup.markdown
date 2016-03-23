@@ -1,7 +1,7 @@
 ---
 title: Complete Guide to Raspberry Pi Based Distributed Backup
 layout: post
-categories: Raspberry Pi,Raspbian, Syncthing, Distributed Backup
+categories: Raspberry Pi,Raspbian, Syncthing, Distributed Backup, Home NAS
 comments: true
 ---
 
