@@ -1,17 +1,67 @@
 ---
 title: Openstack Location Based VM Provisioning
 layout: post
-categories: Openstack, Superfluidity, Nova, 5G, Location Based Services
+categories: Openstack, Superfluidity, Nova, 5G, Location Based Services, MEC, RAN
 comments: true
 ---
 
 
-# Real World Use Case - Video Orchestration and Optimization
-![Mobile edge offloading schema]({{ site.url }}/assets/mobile-edge-offloading.png)
+# Real World Use Case - Emergency Breaklight In Autonomous Cars. 
+Normally, even an advanced driver assistance systems can only react to a direct surroundings of the vehicle.
+With connected driving via `5G` mobile network, the cars will be able to communicate nearly in real time over a large distance
+and provide driving information beyond the driver's line of sight. This will allow the car to slowdown in advance, in 
+the case of an upcoming road hazard. 
+
+A more advanced use case can be considered as well: two cars coordinating a lane change and negotiating the priority and risk of the 
+situation, while taking into an account such parameters as speed, location, and 
+weather conditions.
+
+# The Challenge
+Communication between cars via a `central cloud` has an end to end latency up to seconds, and this is untolerable for the
+car to car communication use case.
+![autonomous cars](/assets/openstack-location-based-vm/central-cloud-car-2-car.png)
+*Car to car communication via central cloud introduces high latency*
+
+# The Straightforward Solution 
+The "simple" solution would be bringing the cloud infrastructure closer to the end users (cars) in our case. 
+One of the possible solutions is being developed by [ETSI](http://www.etsi.org/technologies-clusters/technologies/mobile-edge-computing) 
+and described in following section.
+   
+# Mobile Edge Computing To The Rescue
+Mobile-edge Computing `(MEC)` enables cloud computing capabilities and an IT service environment within the Radio Access Network `(RAN)` in 
+close proximity to mobile subscribers. Simply put, MEC provides small data centers `(cloudlets)` in close proximity to 
+mobile devices, sensors, and end users. These data centers are aimed to be located just one wireless hop away from the user at the 
+radio access network RAN facilities which is reffered to as `network edges` i.e.; the nearest `base station`.
+Because of compute and storage resources being right next to the user enables applications that require low latency responses.
+
+### MEC components
+The architecture consists of several parts:
+ 
+* A distributed wireless network comprised of a remote radio Unit `(RRU)` and antennas.
+ 
+* A high-bandwidth and low-latency optical transport network.
+
+* A centralized baseband unit `(BBU)` pool consisting of general purpose processors with Network Function Virtualization `(NFV)` support.
+
+* MEC application server or simply `(MEC server)`, which is integrated at the RAN element. This server provides computing
+resources, storage capacity, connectivity and access to RAN information. It supports a multitenancy run-time and hosting
+environment for applications and services.
+
+![MEC arch](/assets/openstack-location-based-vm/mec-arch.jpg)
+*MEC components*
 
 
-Being aware to the mobile end user's location, a TV provider can provide advanced video optimization
-techniques according to the mobile access conditions.
+
+# Mobile Edge Computing In Our Use Case
+Adding mobile edge computing and geo service applications to the base stations makes communication much faster, so that
+base stations with MEC [cloudlets](https://en.wikipedia.org/wiki/Cloudlet) will show an end to end latency of a few **miliseconds** 
+![autonomous cars](/assets/openstack-location-based-vm/autonomous-cars-mec.gif)
+*Car to car communication via MEC cloudlet, reduces the latency by several magnitude orders*
+
+
+# OpenStack And MEC Cloudlets Placement
+
+ 
 
 
 # Nova Host Aggregates
