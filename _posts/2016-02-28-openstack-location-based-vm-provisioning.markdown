@@ -3,10 +3,13 @@ title: Openstack Location Based VM Provisioning
 layout: post
 categories: Openstack, Superfluidity, Nova, 5G, Location Based Services, MEC, RAN
 comments: true
+tags:
+    -OpenStack
+    -Mobile Edge Compute
 ---
 
 
-# Real World Use Case - Emergency Breaklight In Autonomous Cars. 
+# Real World Use Case - Emergency Breaklight In Autonomous Cars 
 Normally, even an advanced driver assistance systems can only react to a direct surroundings of the vehicle.
 With connected driving via `5G` mobile network, the cars will be able to communicate nearly in real time over a large distance
 and provide driving information beyond the driver's line of sight. This will allow the car to slowdown in advance, in 
@@ -51,10 +54,9 @@ environment for applications and services.
 *MEC components*
 
 
-
-# Mobile Edge Computing In Our Use Case
+# Connecting Mobile Edge Computing And The Use Case
 Adding mobile edge computing and geo service applications to the base stations makes communication much faster, so that
-base stations with MEC [cloudlets](https://en.wikipedia.org/wiki/Cloudlet) will show an end to end latency of a few **miliseconds** 
+base stations with MEC cloudlets will show an end to end latency of a few **miliseconds**. 
 ![autonomous cars](/assets/openstack-location-based-vm/autonomous-cars-mec.gif)
 *Car to car communication via MEC cloudlet, reduces the latency by several magnitude orders*
 
