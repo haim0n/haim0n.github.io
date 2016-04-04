@@ -46,8 +46,8 @@ The architecture consists of several parts:
 
 * A centralized baseband unit `(BBU)` pool consisting of general purpose processors with Network Function Virtualization `(NFV)` support.
 
-* MEC application server or simply `(MEC server)`, which is integrated at the RAN element. This server provides computing
-resources, storage capacity, connectivity and access to RAN information. It supports a multitenancy run-time and hosting
+* MEC application server or simply `(MEC server)`, which is integrated at the RAN element. This server provides `virtual` 
+computing resources, storage capacity, connectivity and access to RAN information. It supports a multitenancy run-time and hosting
 environment for applications and services.
 
 ![MEC arch](/assets/openstack-location-based-vm/mec-arch.jpg)
@@ -67,10 +67,8 @@ the MEC resources.
 The requirement for the infrastructure is to being able of dynamically adapting to the application needs and scaling 
 according to resource requirements.
 
-In the case of the autonomous cars, that would mean, that in the case of multiple traffic the platform would be required
-to power up  more cpu resources at some specific cloudlet. 
- 
- 
+In the case of the autonomous cars it means that in the case of multiple car traffic the application platform would be required
+to scale and provision sufficient cpu resources which will answer to their computation resources' needs.
 
 
 # Nova Host Aggregates
