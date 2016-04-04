@@ -31,13 +31,13 @@ One of the possible solutions is being developed by [ETSI](http://www.etsi.org/t
 and described in following section.
    
 # Mobile Edge Computing To The Rescue
-Mobile-edge Computing `(MEC)` enables cloud computing capabilities and an IT service environment within the Radio Access Network `(RAN)` in 
-close proximity to mobile subscribers. Simply put, MEC provides small data centers `(cloudlets)` in close proximity to 
-mobile devices, sensors, and end users. These data centers are aimed to be located just one wireless hop away from the user at the 
-radio access network RAN facilities which is reffered to as `network edges` i.e.; the nearest `base station`.
-Because of compute and storage resources being right next to the user enables applications that require low latency responses.
+Mobile-edge Computing `(MEC)` enables *cloud* computing capabilities and an IT service environment within the Radio Access Network `(RAN)` in 
+close proximity to mobile subscribers. Simply put, MEC architecture provides small data centers `(cloudlets)` in close proximity to 
+mobile devices, sensors, and end users (cars in our case). These data centers are aimed to be located just one wireless 
+hop away from the user at the radio access network RAN facilities which is reffered to as `network edges` i.e.; the nearest `base station`.
+Compute and storage resources being right next to the user enables applications that require low latency responses.
 
-### MEC components
+#### MEC components
 The architecture consists of several parts:
  
 * A distributed wireless network comprised of a remote radio Unit `(RRU)` and antennas.
@@ -60,9 +60,16 @@ base stations with MEC cloudlets will show an end to end latency of a few **mili
 ![autonomous cars](/assets/openstack-location-based-vm/autonomous-cars-mec.gif)
 *Car to car communication via MEC cloudlet, reduces the latency by several magnitude orders*
 
-
 # OpenStack And MEC Cloudlets Placement
+OpenStack is being the de facto in virtualization platform, and in our case it is the heart of IT infrastructure, provisioning
+the MEC resources.
 
+The requirement for the infrastructure is to being able of dynamically adapting to the application needs and scaling 
+according to resource requirements.
+
+In the case of the autonomous cars, that would mean, that in the case of multiple traffic the platform would be required
+to power up  more cpu resources at some specific cloudlet. 
+ 
  
 
 
