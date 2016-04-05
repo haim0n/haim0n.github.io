@@ -28,11 +28,12 @@ between cars has an end to end latency of up to *seconds*, and this is untolerab
 
 # The Straightforward Solution 
 The "simple" solution would be bringing the cloud infrastructure closer to the end users (cars) in our case. 
-One of the possible ways to achieve that is being developed by ETSI and referred to as  
-[mobile edge computing](http://www.etsi.org/technologies-clusters/technologies/mobile-edge-computing). It is described in 
-the following section.
+One of the possible ways to achieve that is being developed by ETSI and referred to as [mobile edge computing](http://www.etsi.org/technologies-clusters/technologies/mobile-edge-computing).
+It is described in the following section.
    
 # Mobile Edge Computing To The Rescue
+
+#### What It Solves
 Mobile-edge Computing `(MEC)` enables *cloud* computing capabilities and an IT service environment within the Radio Access Network `(RAN)` in 
 close proximity to mobile subscribers. Simply put, MEC architecture provides small data centers `(cloudlets)` nearer to 
 mobile devices, sensors, and end users (cars in our case). These data centers are aimed to be located just one wireless 
@@ -95,15 +96,21 @@ application platform management system.
 # Mobile Edge Computing And OpenStack
 [OpenStack](https://en.wikipedia.org/wiki/OpenStack) is being the de facto software in IaaS virtualization platform world.
 It is no wonder that it's one of the major candidates to fill in the MEC server platform virtualization manager slot. 
-So for our case it is the block responsible for provisioning the resources required for the car to car communication
+So, for our case it is the block responsible for provisioning the resources required for the car to car communication
 application.
-
-The requirement for the infrastructure is to having the ability to dynamically adapt to for the application needs and scale 
+The requirement for the infrastructure is to have the ability of dynamically adapting to the application needs and scale 
 the resources according to the requirements from it.
 
 In the case of the autonomous cars it means that the application platform would be required
-to scale and provision the cloudlet with resources when more car traffic hits the base station, and vise versa - remove 
-those when traffic is low.
+to scale and provision the cloudlet with resources when more cars get the base station coverage, and hitting it with more
+data traffic to process, and vise versa - removing those resources when less car traffic is passing by (for instance at off peak
+hours or during weekends/holidays). 
+As a more complex scenario the mobility issue should be taken into consideration. Meaning that if a car leaves from, or arrives
+at a base station, the infrastructure needs to be prepared to handle it. In IaaS world this would imply the resources to 
+be pre allocated in advance at the covering base station.
+
+Well, now's the time for a question to OpenStack: **"how can the provisioned resources (let's assume compute for 
+simplicity's sake) be bound to the base station's physical location" ?**
 
 # Resource Provisioning At Physical Location
 
