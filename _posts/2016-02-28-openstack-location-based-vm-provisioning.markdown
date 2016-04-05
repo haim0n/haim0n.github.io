@@ -62,15 +62,14 @@ environment for applications and services.
 *MEC components*
 
 #### Zoom Into the MEC Server Platform
-The MEC server platform consists of a hosting infrastructure and an application platform as described below:
-![MEC platform server](/assets/openstack-location-based-vm/mec-platform-server.jpg)
-*MEC server platform*
-
 The MEC hosting infrastructure consists of hardware resources and a virtualization layer. The details of
 the actual implementation of the MEC hosting infrastructure (including the actual hardware
 components) are abstracted from the applications being hosted on the platform. 
+![MEC platform server](/assets/openstack-location-based-vm/mec-platform-server.jpg)
+*MEC server platform*
 
-* The MEC application platform provides the capabilities for hosting applications and consists of the
+
+* The MEC `application platform` provides the capabilities for hosting applications and consists of the
 application’s virtualization manager and application platform services.
 
 * The `virtualization manager` supports multi-tenancy, run-time and hosting environment for applications by providing 
@@ -78,7 +77,7 @@ Infrastructure as a Service `(IaaS)` facilities. The IaaS provides a security an
 and the platform. Virtual-appliance applications run on top of an IaaS and are delivered as packaged-operating-system 
 Virtual Machine (VM) images, allowing complete freedom of implementation.
 
-* The MEC application-platform services provide a set of middleware application services and
+* The MEC application platform services provide a set of middleware application services and
 infrastructure services to the applications hosted on the MEC platform:
     * Communication services
         * Service registry
@@ -107,7 +106,7 @@ data traffic to process, and vise versa - removing those resources when less car
 hours or during weekends/holidays). 
 As a more complex scenario the mobility issue should be taken into consideration. Meaning that if a car leaves from, or arrives
 at a base station, the infrastructure needs to be prepared to handle it. In IaaS world this would imply the resources to 
-be pre allocated in advance at the covering base station.
+be pre allocated in advance (or having a very short provisioning time) at the covering base station.
 
 Well, now's the time for a question to OpenStack: **"how can the provisioned resources (let's assume compute for 
 simplicity's sake) be bound to the base station's physical location" ?**
