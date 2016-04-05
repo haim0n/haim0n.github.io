@@ -20,38 +20,94 @@ situation, while taking into an account such parameters as speed, location, and
 weather conditions.
 
 # The Challenge
-Communication between cars via a `central cloud` has an end to end latency up to seconds, and this is untolerable for the
-car to car communication use case.
+Current mobile operators infrastructure is based on a central cloud, located at central data center. It means that all
+data between mobile end user flows all the way up to the core data center and processed there. That way of communication 
+between cars has an end to end latency of up to *seconds*, and this is untolerable for the use case.
 ![autonomous cars](/assets/openstack-location-based-vm/central-cloud-car-2-car.png)
 *Car to car communication via central cloud introduces high latency*
 
 # The Straightforward Solution 
 The "simple" solution would be bringing the cloud infrastructure closer to the end users (cars) in our case. 
-One of the possible solutions is being developed by [ETSI](http://www.etsi.org/technologies-clusters/technologies/mobile-edge-computing) 
-and described in following section.
+One of the possible ways to achieve that is being developed by ETSI and referred to as  
+[mobile edge computing](http://www.etsi.org/technologies-clusters/technologies/mobile-edge-computing). It is described in 
+the following section.
    
 # Mobile Edge Computing To The Rescue
 Mobile-edge Computing `(MEC)` enables *cloud* computing capabilities and an IT service environment within the Radio Access Network `(RAN)` in 
-close proximity to mobile subscribers. Simply put, MEC architecture provides small data centers `(cloudlets)` in close proximity to 
+close proximity to mobile subscribers. Simply put, MEC architecture provides small data centers `(cloudlets)` nearer to 
 mobile devices, sensors, and end users (cars in our case). These data centers are aimed to be located just one wireless 
 hop away from the user at the radio access network RAN facilities which is reffered to as `network edges` i.e.; the nearest `base station`.
 Compute and storage resources being right next to the user enables applications that require low latency responses.
 
-#### MEC components
+#### MEC Main Components
 The architecture consists of several parts:
- 
-* A distributed wireless network comprised of a remote radio Unit `(RRU)` and antennas.
  
 * A high-bandwidth and low-latency optical transport network.
 
-* A centralized baseband unit `(BBU)` pool consisting of general purpose processors with Network Function Virtualization `(NFV)` support.
+* A distributed wireless network comprised of a [remote radio Unit](https://en.wikipedia.org/wiki/Remote_radio_head) 
+`(RRU)` or remote radio head `(RRH)` and antennas.
 
-* MEC application server or simply `(MEC server)`, which is integrated at the RAN element. This server provides `virtual` 
+* A centralized baseband unit `(BBU)` pool consisting of general purpose processors with Network Function Virtualization `(NFV)` support.
+The BBU is a unit that processes baseband signals in telecomm systems. The BBU pool is built on open hardware, like 
+x86/ARM CPU based servers, plus interface cards to handle fiber link to RRH and inter-connection in the pool.
+
+* MEC server platform or simply `(MEC server)`, which is integrated at the RAN element. This server provides `virtual` 
 computing resources, storage capacity, connectivity and access to RAN information. It supports a multitenancy run-time and hosting
 environment for applications and services.
 
+*Note*: in MEC world the BBU and RRU are being *virtualized* as well.
+
 ![MEC arch](/assets/openstack-location-based-vm/mec-arch.jpg)
 *MEC components*
+
+#### Zoom Into the MEC Server Platform
+The MEC server platform consists of a hosting infrastructure and an application platform as described below:
+![MEC arch](/assets/openstack-location-based-vm/mec-platform-server.jpg)
+*MEC server platform*
+
+The MEC hosting infrastructure consists of hardware resources and a virtualization layer. The details of
+the actual implementation of the MEC hosting infrastructure (including the actual hardware
+components) are abstracted from the applications being hosted on the platform. 
+
+* The MEC application platform provides the capabilities for hosting applications and consists of the
+application’s virtualization manager and application platform services.
+
+* The `virtualization manager` supports multi-tenancy, run-time and hosting environment for applications by providing 
+Infrastructure as a Service `(IaaS)` facilities. The IaaS provides a security and resource sandbox for the applications 
+and the platform. Virtual-appliance applications run on top of an IaaS and are delivered as packaged-operating-system 
+Virtual Machine (VM) images, allowing complete freedom of implementation.
+
+* The MEC application-platform services provide a set of middleware application services and
+infrastructure services to the applications hosted on the MEC platform:
+    * Communication services
+        * Service registry
+        * Radio Network Information Services (RNIS)
+    * Traffic Offload Function (TOF)
+
+MEC applications from vendors, service providers, and third-parties are deployed and executed within
+Virtual Machines. The MEC server and its services are application agnostic. The applications are
+managed by their related Application Management Systems which are application-specific components.
+Neither the applications nor their interfaces with the Application Management Systems are included in
+the scope of the work of the MEC initiative. The application management capabilities do not include
+application life-cycle management (e.g. start, stop, etc.), which is under the responsibility of the MEC
+application platform management system. 
+
+# Mobile Edge Computing And OpenStack
+[OpenStack](https://en.wikipedia.org/wiki/OpenStack) is being the de facto software in IaaS virtualization platform world.
+It is no wonder that it's one of the major candidates to fill in the MEC server platform virtualization manager slot. 
+So for our case it is the block responsible for provisioning the resources required for the car to car communication
+application.
+
+The requirement for the infrastructure is to having the ability to dynamically adapt to for the application needs and scale 
+the resources according to the requirements from it.
+
+In the case of the autonomous cars it means that the application platform would be required
+to scale and provision the cloudlet with resources when more car traffic hits the base station, and vise versa - remove 
+those when traffic is low.
+
+# Resource Provisioning At Physical Location
+
+
 
 
 # Connecting Mobile Edge Computing And The Use Case
@@ -60,15 +116,6 @@ base stations with MEC cloudlets will show an end to end latency of a few **mili
 ![autonomous cars](/assets/openstack-location-based-vm/autonomous-cars-mec.gif)
 *Car to car communication via MEC cloudlet, reduces the latency by several magnitude orders*
 
-# OpenStack And MEC Cloudlets Placement
-OpenStack is being the de facto in virtualization platform, and in our case it is the heart of IT infrastructure, provisioning
-the MEC resources.
-
-The requirement for the infrastructure is to being able of dynamically adapting to the application needs and scaling 
-according to resource requirements.
-
-In the case of the autonomous cars it means that in the case of multiple car traffic the application platform would be required
-to scale and provision sufficient cpu resources which will answer to their computation resources' needs.
 
 
 # Nova Host Aggregates
