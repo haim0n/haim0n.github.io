@@ -63,7 +63,7 @@ environment for applications and services.
 
 #### Zoom Into the MEC Server Platform
 The MEC server platform consists of a hosting infrastructure and an application platform as described below:
-![MEC arch](/assets/openstack-location-based-vm/mec-platform-server.jpg)
+![MEC platform server](/assets/openstack-location-based-vm/mec-platform-server.jpg)
 *MEC server platform*
 
 The MEC hosting infrastructure consists of hardware resources and a virtualization layer. The details of
