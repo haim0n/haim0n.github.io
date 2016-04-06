@@ -113,19 +113,11 @@ simplicity's sake) be bound to the base station's physical location" ?**
 
 # Resource Provisioning At Physical Location
 
+#### Use Nova Cells And Regions
+TBD
 
-
-
-# Connecting Mobile Edge Computing And The Use Case
-Adding mobile edge computing and geo service applications to the base stations makes communication much faster, so that
-base stations with MEC cloudlets will show an end to end latency of a few **miliseconds**. 
-![autonomous cars](/assets/openstack-location-based-vm/autonomous-cars-mec.gif)
-*Car to car communication via MEC cloudlet, reduces the latency by several magnitude orders*
-
-
-
-# Nova Host Aggregates
-A  [`host aggregate`][host-aggregates] is simply put, a group of hosts sharing some metadata. A host can be in more than one host aggregate. The concept of host aggregates is only exposed to cloud administrators.
+#### Use Nova Host Aggregates
+A  `host aggregate` is simply put, a group of hosts sharing some metadata. A host can be in more than one host aggregate. The concept of host aggregates is only exposed to cloud administrators.
 
 A host aggregate may be exposed to users in the form of an `availability zone`. When you create a host aggregate, you have the option of providing an availability zone name. If specified, the host aggregate you have created is now available as an availability zone that can be requested upon provisioning.
 
@@ -200,7 +192,8 @@ $ nova boot --flavor 84 --image 64d985ba-2cfa-434d-b789-06eac141c260 \
 
 
 
-
-[superfluidity]: http://superfluidity.eu/about/specific-objectives/
-[bts-wiki]: https://en.wikipedia.org/wiki/Base_transceiver_station
-[host-aggregates]: http://docs.openstack.org/developer/nova/aggregates.html
+# Connecting Mobile Edge Computing And The Use Case
+Adding mobile edge computing and geo service applications to the base stations makes communication much faster, so that
+base stations with MEC cloudlets will show an end to end latency of a few **miliseconds**. 
+![autonomous cars](/assets/openstack-location-based-vm/autonomous-cars-mec.gif)
+*Car to car communication via MEC cloudlet, reduces the latency by several magnitude orders*
