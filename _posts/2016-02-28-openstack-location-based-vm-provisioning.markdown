@@ -111,39 +111,43 @@ be pre allocated in advance (or having a very short provisioning time) at the co
 Well, now's the time for a question to OpenStack: **"how can the provisioned resources (let's assume compute for 
 simplicity's sake) be bound to the base station's physical location" ?**
 
-# Resource Provisioning At Physical Location
+# Resource Provisioning At Specific MEC
 
 #### Use Nova Cells And Regions
-TBD
+At the base of this concept lay down [OpenStack cells](http://docs.openstack.org/developer/nova/cells.html).
+
 
 #### Use Nova Host Aggregates
-A  `host aggregate` is simply put, a group of hosts sharing some metadata. A host can be in more than one host aggregate. The concept of host aggregates is only exposed to cloud administrators.
+A  `host aggregate` is simply put, a group of hosts sharing some metadata. A host can be in more than one host aggregate. 
+The concept of host aggregates is only exposed to cloud administrators.
 
-A host aggregate may be exposed to users in the form of an `availability zone`. When you create a host aggregate, you have the option of providing an availability zone name. If specified, the host aggregate you have created is now available as an availability zone that can be requested upon provisioning.
+A host aggregate may be exposed to users in the form of an `availability zone`. When you create a host aggregate, 
+you have the option of providing an availability zone name. If specified, the host aggregate you have created is now 
+available as an availability zone that can be requested upon provisioning.
 
 
 Create a host aggregate that is exposed to users as an availability zone:
 {% highlight bash %}
-$ nova aggregate-create nyc-aggregate1 nyc:40.71:-74.00
+$ nova aggregate-create mec1-aggregate1 mec1:40.71:-74.00
 +----+-----------------+-------------------+-------+----------+
 | Id | Name            | Availability Zone | Hosts | Metadata |
 +----+-----------------+-------------------+-------+----------+
-| 1  | nyc-aggregate1  | nyc:40.71:-74.00  |       |          |
+| 1  | mec-aggregate1  | mec1:40.71:-74.00 |       |          |
 +----+-----------------+-------------------+-------+----------+
 {% endhighlight %}
 
-Add a host to the newly created nyc host aggregate:
+Add a host to the newly created mec1 host aggregate:
 {% highlight bash %}
 $ nova aggregate-add-host 1 host1
 Aggregate 2 has been successfully updated.
 +----+-----------------+-------------------+-------------+----------------------------------------------+
 | Id | Name            | Availability Zone | Hosts       | Metadata                                     |
 +----+-----------------+-------------------+---------------+--------------------------------------------+
-| 1  | nyc-aggregate   | nyc:40.71:-74.00  | [u'host1']  | {u'availability_zone': u'nyc:40.71:-74.00'}  |
+| 1  | mec1-aggregate   | mec1:40.71:-74.00  | [u'host1']  | {u'availability_zone': u'mec1:40.71:-74.00'}  |
 +----+-----------------+-------------------+---------------+--------------------------------------------+
 {% endhighlight %}
 
-Now that the nyc availability zone has been defined and contains one host, we can create another zone for Austin, Tx:
+Now that the mec1 availability zone has been defined and contains one host, we can create another zone for Austin, Tx:
 {% highlight bash %}
 $ nova aggregate-create txs-aggregate1 aus:30.26:-97.74
 +----+-----------------+-------------------+-------+----------+
@@ -171,7 +175,7 @@ Assuming there are only two data centeres, a simple table can be created:
 
 | Geo Corrdinates | Availability Zone|
 |-----------------|------------------|
-| 40.71:-74.00    | nyc:40.71:-74.00 |
+| 40.71:-74.00    | mec1:40.71:-74.00 |
 | 30.26:-97.74    | aus:30.26:-97.74 |
 
 
@@ -185,7 +189,7 @@ Our location decision function does the following:
 
 {% highlight bash %}
 $ nova boot --flavor 84 --image 64d985ba-2cfa-434d-b789-06eac141c260 \
- --availability-zone nyc:40.71:-74.00 app1-instance
+ --availability-zone mec1:40.71:-74.00 app1-instance
 {% endhighlight %}
 
 
