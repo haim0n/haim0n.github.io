@@ -113,87 +113,33 @@ simplicity's sake) be bound to the base station's physical location" ?**
 
 # Resource Provisioning At Specific MEC
 
-#### Use Nova Cells And Regions
-At the base of this concept lay down [OpenStack cells](http://docs.openstack.org/developer/nova/cells.html).
+#### Using Nova Regions
+
+**Suggested Architechture**
+
+In this schema, each MEC is represented via nova region. Each region is a separate cloud installation with a unique 
+REST API. 
+
+![MEC with nova regions](/assets/openstack-location-based-vm/mec-regions-arch.png)
 
 
-#### Use Nova Host Aggregates
-A  `host aggregate` is simply put, a group of hosts sharing some metadata. A host can be in more than one host aggregate. 
-The concept of host aggregates is only exposed to cloud administrators.
+**Orchestrating MEC**
 
-A host aggregate may be exposed to users in the form of an `availability zone`. When you create a host aggregate, 
-you have the option of providing an availability zone name. If specified, the host aggregate you have created is now 
-available as an availability zone that can be requested upon provisioning.
+*TBD: HEAT integration.*
 
+The orchestration layer implements the mapping logic between an actual MEC and the geo location of the
+required resources location.
 
-Create a host aggregate that is exposed to users as an availability zone:
+![MEC with nova regions](/assets/openstack-location-based-vm/mec-map.png)
+
+After the decision that a newly provisioned resources location required at MEC3, the nova api gets invoked:
 {% highlight bash %}
-$ nova aggregate-create mec1-aggregate1 mec1:40.71:-74.00
-+----+-----------------+-------------------+-------+----------+
-| Id | Name            | Availability Zone | Hosts | Metadata |
-+----+-----------------+-------------------+-------+----------+
-| 1  | mec-aggregate1  | mec1:40.71:-74.00 |       |          |
-+----+-----------------+-------------------+-------+----------+
+nova boot --os-region-name mec3 ...
 {% endhighlight %}
 
-Add a host to the newly created mec1 host aggregate:
-{% highlight bash %}
-$ nova aggregate-add-host 1 host1
-Aggregate 2 has been successfully updated.
-+----+-----------------+-------------------+-------------+----------------------------------------------+
-| Id | Name            | Availability Zone | Hosts       | Metadata                                     |
-+----+-----------------+-------------------+---------------+--------------------------------------------+
-| 1  | mec1-aggregate   | mec1:40.71:-74.00  | [u'host1']  | {u'availability_zone': u'mec1:40.71:-74.00'}  |
-+----+-----------------+-------------------+---------------+--------------------------------------------+
-{% endhighlight %}
+#### Using Cells
 
-Now that the mec1 availability zone has been defined and contains one host, we can create another zone for Austin, Tx:
-{% highlight bash %}
-$ nova aggregate-create txs-aggregate1 aus:30.26:-97.74
-+----+-----------------+-------------------+-------+----------+
-| Id | Name            | Availability Zone | Hosts | Metadata |
-+----+-----------------+-------------------+-------+----------+
-| 2  | txs-aggregate   | aus:30.26:-97.74  |       |          |
-+----+-----------------+-------------------+-------+----------+
-{% endhighlight %}
-
-And assigning a host to it:
-{% highlight bash %}
-$ nova aggregate-add-host 2 host2
-Aggregate 2 has been successfully updated.
-+----+-----------------+-------------------+-------------+---------------------------------------------+
-| Id | Name            | Availability Zone | Hosts       | Metadata                                    |
-+----+-----------------+-------------------+---------------+-------------------------------------------+
-| 1  | txs-aggregate   | aus:30.26:-97.74  | [u'host1']  | {u'availability_zone': u'aus:30.26:-97.74 '}|
-+----+-----------------+-------------------+---------------+-------------------------------------------+
-{% endhighlight %}
-
-In order for the proper location decision to be made - we need an orchestration logic, which is out of current scope, but
-we can come up with a simplified one for our purpuse.
-
-Assuming there are only two data centeres, a simple table can be created:
-
-| Geo Corrdinates | Availability Zone|
-|-----------------|------------------|
-| 40.71:-74.00    | mec1:40.71:-74.00 |
-| 30.26:-97.74    | aus:30.26:-97.74 |
-
-
-
-Our location decision function does the following: 
-
-* gets the user's location
-* travels the table and for each entry calculates the distance
-* returns a list of placement candidates
-* attempts to boot an instance with specified `app1-instance` flavor
-
-{% highlight bash %}
-$ nova boot --flavor 84 --image 64d985ba-2cfa-434d-b789-06eac141c260 \
- --availability-zone mec1:40.71:-74.00 app1-instance
-{% endhighlight %}
-
-
-
+TBD
 
 
 # Connecting Mobile Edge Computing And The Use Case
